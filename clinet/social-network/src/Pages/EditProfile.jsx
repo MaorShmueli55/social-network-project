@@ -32,6 +32,7 @@ const EditProfile = () => {
   });
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   useCheckIfUserValid();
 
   const handleChange = (e) => {
@@ -58,6 +59,7 @@ const EditProfile = () => {
   const handleDelete = () => {
     deleteUser();
     deleteCookie();
+    dispatch(setUser(false));
     navigate("/");
   };
 
@@ -146,7 +148,7 @@ const EditProfile = () => {
         </button>
         {showModal && (
           <div className="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center z-50">
-            <div className="bg-bgBtnColor rounded-lg shadow-lg p-6 max-w-sm w-full">
+            <div className="bg-bgBtnColor rounded-lg p-6 max-w-sm w-full">
               <h2 className="text-lg font-bold mb-4 text-center">
                 Are you sure?
               </h2>
@@ -155,9 +157,7 @@ const EditProfile = () => {
                 <button
                   className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 transition"
                   onClick={() => {
-                    deleteUser();
-                    deleteCookie();
-                    navigate("/");
+                    handleDelete();
                   }}
                 >
                   Confirm Delete
