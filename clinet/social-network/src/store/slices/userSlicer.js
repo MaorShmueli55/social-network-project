@@ -9,8 +9,6 @@ const userSlice = createSlice({
   },
   reducers: {
     setUser: (state, action) => {
-      console.log(action.payload);
-
       (state.username = action.payload.username),
         (state.nickname = action.payload.nickname),
         (state.profile = action.payload.profile),

@@ -4,6 +4,9 @@ import { deleteUser } from "../utils/userApi";
 import { deleteCookie } from "../utils/cookie";
 import { useNavigate } from "react-router-dom";
 import ImageUpload from "../Components/uploadImg";
+import { updateUser } from "../utils/userApi.js";
+import { useDispatch } from "react-redux";
+import { setUser } from "../store/slices/userSlicer";
 
 const divChoice = "w-[470px] mx-auto text-m";
 const inputCss =
@@ -26,7 +29,10 @@ const EditProfile = () => {
     email: "",
     password: "",
   });
+
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   useCheckIfUserValid();
 
   const handleChange = (e) => {
@@ -40,12 +46,13 @@ const EditProfile = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
+    const data = await updateUser(formData);
 
     setIsSubmitted(true);
     setBtnText("Submitting...");
     setTimeout(() => {
       setBtnText("Submit");
-      setMsgText("Profile updated successfully!");
+      setMsgText(data.message);
       setIsSubmitted(false);
     }, 2000);
   };
@@ -57,7 +64,7 @@ const EditProfile = () => {
   return (
     <div className="h-screen p-[20px] sm:mr-[70px}">
       <h1 className={titleCss}>Edit Your Profile Details</h1>
-      <div className={titleCss}>{msgText}gh</div>
+      <div className={titleCss}>{msgText}</div>
       <div className={`${divChoice}`}>
         <ImageUpload setFormData={setFormData} img={"profile"} />
         <form
@@ -68,7 +75,7 @@ const EditProfile = () => {
           }}
         >
           <div>
-            <label htmlFor="nickname">Change NsfbdgbdgcickName:</label>
+            <label htmlFor="nickname">Change NickName:</label>
             <input
               className={inputCss}
               placeholder="NickName"

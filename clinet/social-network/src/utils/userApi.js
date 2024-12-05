@@ -47,8 +47,21 @@ export const isUserValid = async () => {
   }
 };
 
-export const updateUser = async () => {
+export const updateUser = async (updateUser) => {
   try {
+    const jwt = Cookies.get("jwt");
+    const response = await axios.patch(
+      `${base_url}/api/user/updateUser`,
+      updateUser,
+      {
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+        },
+      }
+    );
+    console.log(response.data);
+
+    return response.data;
   } catch (error) {}
 };
 
