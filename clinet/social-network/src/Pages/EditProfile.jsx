@@ -68,7 +68,7 @@ const EditProfile = () => {
           }}
         >
           <div>
-            <label htmlFor="nickname">Change NickName:</label>
+            <label htmlFor="nickname">Change NsfbdgbdgcickName:</label>
             <input
               className={inputCss}
               placeholder="NickName"
