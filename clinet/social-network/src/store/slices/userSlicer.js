@@ -13,8 +13,8 @@ const userSlice = createSlice({
       (state.username = action.payload.username),
         (state.nickname = action.payload.nickname),
         (state.profile = action.payload.profile),
-        (state.bio = action.payload.bio);
-      state.email = action.payload.email;
+        (state.bio = action.payload.bio),
+        (state.email = action.payload.email);
     },
   },
 });

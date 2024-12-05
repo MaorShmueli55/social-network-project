@@ -122,18 +122,6 @@ const EditProfile = () => {
               onChange={handleChange}
             />
           </div>
-          <div>
-            <label htmlFor="password">Change Password:</label>
-            <input
-              className={inputCss}
-              placeholder="Password"
-              value={formData.password}
-              type="password"
-              id="password"
-              name="password"
-              onChange={handleChange}
-            />
-          </div>
           <button
             className={`${submitCss} ${isSubmitted ? "animate-pulse" : ""}`}
             type="submit"

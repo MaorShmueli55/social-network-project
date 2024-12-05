@@ -11,6 +11,7 @@ export const TokenValid = (req, res) => {
       profile: req.user.profile,
       bio: req.user.bio,
       nickname: req.user.nickname,
+      email: req.user.email,
     });
   } catch (error) {
     res
