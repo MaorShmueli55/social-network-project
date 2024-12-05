@@ -57,7 +57,15 @@ function NavBar() {
 
         <Link to="/MyAccount">
           <div className={iconCss}>
-            <Person2OutlinedIcon sx={{ fontSize: 40, padding: "1px" }} />
+            {isLog.profile ? (
+              <img
+                src={isLog.profile}
+                alt="Profile"
+                className="w-[40px] h-[40px] rounded-full mb-2 border border-gray-300"
+              />
+            ) : (
+              <Person2OutlinedIcon sx={{ fontSize: 40, padding: "1px" }} />
+            )}
           </div>
         </Link>
       </div>

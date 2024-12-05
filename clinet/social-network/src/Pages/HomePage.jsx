@@ -14,7 +14,7 @@ const HomePage = () => {
   const user = useSelector((state) => state.user);
   return (
     <>
-      <div>
+      <div className="p-5">
         <h1>welcome {user.username}</h1>
       </div>
     </>
