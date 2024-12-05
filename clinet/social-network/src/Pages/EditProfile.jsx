@@ -25,10 +25,9 @@ const EditProfile = () => {
   const [formData, setFormData] = useState({
     profile: user.profile,
     nickname: user.nickname,
-    bio: user.email,
+    bio: user.bio,
     newUsername: user.username,
     newEmail: user.email,
-    password: user.password,
   });
 
   const navigate = useNavigate();
@@ -44,6 +43,7 @@ const EditProfile = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+    console.log(formData);
     const data = await updateUser(formData);
     setIsSubmitted(true);
     setBtnText("Submitting...");
