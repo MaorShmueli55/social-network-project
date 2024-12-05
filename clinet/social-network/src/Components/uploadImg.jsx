@@ -40,7 +40,7 @@ const ImageUpload = ({ setFormData, img }) => {
   };
 
   return (
-    <div>
+    <div className="mt-10 ">
       <h1>Upload an Image</h1>
       <input type="file" onChange={handleImageChange} />
       <button onClick={handleUpload}>Upload</button>
