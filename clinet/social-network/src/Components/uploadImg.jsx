@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import axios from "axios";
 
 const ImageUpload = ({ setFormData, img }) => {
@@ -7,6 +7,9 @@ const ImageUpload = ({ setFormData, img }) => {
   const [previewUrl, setPreviewUrl] = useState(""); // state for preview URL
   const [uploadStatus, setUploadStatus] = useState("");
   const [uploadedImageUrl, setUploadedImageUrl] = useState("");
+  
+  // Reference to the file input
+  const fileInputRef = useRef(null);
 
   //manage the img state
   const handleImageChange = (e) => {
@@ -21,6 +24,8 @@ const ImageUpload = ({ setFormData, img }) => {
   const handleUpload = async () => {
     if (!image) {
       setUploadStatus("Please select an image to upload.");
+      // Trigger file input click to let user select a file
+      fileInputRef.current.click();
       return;
     }
     // formData holds all the config details as the body of the request
@@ -46,8 +51,15 @@ const ImageUpload = ({ setFormData, img }) => {
     }
   };
 
+  // Handle clicking the upload icon or button
+  const handleFileInputClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
   return (
-    <div className="mt-10 gap-5 flex flex-col items-center ">
+    <div className="mt-10 mb-10 gap-5 flex flex-col items-center ">
       <h1 className="mb-5">Upload an Image -</h1>
       {!previewUrl && (
         <p className="mb-5 text-slate-300 text-sm">
@@ -56,6 +68,7 @@ const ImageUpload = ({ setFormData, img }) => {
       )}
       <input
         type="file"
+        ref={fileInputRef} // Connect the reference to the input
         onChange={handleImageChange}
         className="hidden"
         id="fileUpload"
@@ -73,14 +86,29 @@ const ImageUpload = ({ setFormData, img }) => {
         </>
       )}
       <div className="flex flex-row bg-primary w-full rounded">
-        <label htmlFor="fileUpload" className="self-start cursor-pointer">
+        {/* Label that triggers file selection */}
+        <label
+          htmlFor="fileUpload"
+          className="self-start cursor-pointer"
+          onClick={handleFileInputClick} // Handle label click
+        >
           <img
             src="/uploadImgIcon.svg"
             alt="upload icon"
             className="max-w-10 animate-bounce"
           />
         </label>
-        <button onClick={handleUpload} className="bg-primary w-full rounded">
+        {/* Button that uploads the image and also opens file input if no image is selected */}
+        <button
+          onClick={() => {
+            if (!image) {
+              handleFileInputClick(); // Trigger file selection if no image is selected
+            } else {
+              handleUpload(); // Upload image if one is selected
+            }
+          }}
+          className="bg-primary w-full rounded"
+        >
           Upload image
         </button>
       </div>
