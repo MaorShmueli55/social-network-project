@@ -108,6 +108,16 @@ export const updateUser = async (req, res) => {
   try {
     const { newUsername, newEmail, profile, nickname, bio, newPassword } =
       req.body;
+
+    const existingUser = await User.findOne({
+      $or: [{ username: newUsername }, { email: newEmail }],
+    });
+
+    if (existingUser) {
+      return res
+        .status(400)
+        .json({ message: "Username or email already exists" });
+    }
     const id = req.user._id;
     const updateData = {};
     if (newUsername) updateData.username = newUsername;
@@ -117,36 +127,39 @@ export const updateUser = async (req, res) => {
     if (nickname) updateData.nickname = nickname;
     if (bio) updateData.bio = bio;
 
+    const user = await User.findById(id);
+
     const updatedUser = await User.findByIdAndUpdate(id, updateData, {
       new: true,
     });
-    const user = await User.findById(id);
-    console.log(user);
+    try {
+      const token = JWT.sign(
+        {
+          username: user.username,
+          nickname: user.nickname,
+          email: user.email,
+          bio: user.bio,
+          profile: user.profile,
+        },
+        process.env.JWT_KEY,
+        JWT_EXPIRATION
+      );
+      res.cookie("jwt", token, {
+        httpOnly: false,
+        secure: true,
+        sameSite: "strict",
+        maxAge: 3600000,
+      });
 
-    const token = JWT.sign(
-      {
-        id: user._id,
-        profile: user.profile,
-        bio: user.bio,
-        nickname: user.nickname,
-        username: user.username,
-        email: user.email,
-      },
-      process.env.JWT_KEY,
-      JWT_EXPIRATION
-    );
-    res.cookie("jwt", token, {
-      httpOnly: false,
-      secure: true,
-      sameSite: "strict",
-      maxAge: 3600000,
-    });
-
-    res.status(201).send({
-      message: "user updated successfully",
-      updatedUser,
-      token,
-    });
+      res.status(201).send({
+        message: "user updated successfully",
+        updatedUser,
+        token,
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(400).send("error creating token");
+    }
   } catch (error) {
     console.error("Error updating user", error);
     res.status(500).json({ error: "Server error" });
