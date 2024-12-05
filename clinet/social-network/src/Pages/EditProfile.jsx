@@ -55,7 +55,9 @@ const EditProfile = () => {
   };
 
   const handleDelete = () => {
-    deleteUser(), deleteCookie(), navigate("/");
+    deleteUser();
+    deleteCookie();
+    navigate("/");
   };
 
   return (

@@ -6,6 +6,7 @@ const JWT_EXPIRATION = { expiresIn: "1h" };
 export const TokenValid = (req, res) => {
   try {
     res.status(200).send({
+      id: req.user._id,
       username: req.user.username,
       profile: req.user.profile,
       bio: req.user.bio,
@@ -127,14 +128,16 @@ export const updateUser = async (req, res) => {
     if (nickname) updateData.nickname = nickname;
     if (bio) updateData.bio = bio;
 
-    const user = await User.findById(id);
-
     const updatedUser = await User.findByIdAndUpdate(id, updateData, {
       new: true,
     });
+    const user = await User.findById(id);
+    console.log(updatedUser);
+
     try {
       const token = JWT.sign(
         {
+          _id: user._id,
           username: user.username,
           nickname: user.nickname,
           email: user.email,
@@ -144,6 +147,7 @@ export const updateUser = async (req, res) => {
         process.env.JWT_KEY,
         JWT_EXPIRATION
       );
+
       res.cookie("jwt", token, {
         httpOnly: false,
         secure: true,

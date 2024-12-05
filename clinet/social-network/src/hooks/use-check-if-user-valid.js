@@ -8,7 +8,6 @@ export async function useCheckIfUserValid() {
   const dispatch = useDispatch();
 
   const dataAuth = await isUserValid();
-
   if (dataAuth.userLogout) {
     navigate("/");
   } else {
