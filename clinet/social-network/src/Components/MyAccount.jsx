@@ -24,7 +24,19 @@ const MyAccount = () => {
       <div className="sm:flex sm:justify-center">
         <div className="sm:flex sm:flex-col items-center">
           <p className="text-[35px] mb-[10px]">{user.username}</p>
-          <AccountCircleIcon sx={{ fontSize: "130px", marginBottom: "5px" }} />
+          <div>
+            {user.profile ? (
+              <img
+                src={user.profile}
+                alt="Profile"
+                className="w-[130px] h-[130px] rounded-full mb-2 border border-gray-300"
+              />
+            ) : (
+              <AccountCircleIcon
+                sx={{ fontSize: "130px", marginBottom: "5px" }}
+              />
+            )}
+          </div>
           <p className="text-[17px]">{user.nickname}</p>
           <p className="text-[25px] mb-[10px]">{user.bio}</p>
           <div className="flex p-[17px] max-w-[600px]">
