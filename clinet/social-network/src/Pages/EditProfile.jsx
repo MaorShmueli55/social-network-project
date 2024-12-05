@@ -21,6 +21,7 @@ const EditProfile = () => {
   const [btnText, setBtnText] = useState("Submit");
   const [msgText, setMsgText] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const user = useSelector((state) => state.user);
   const [formData, setFormData] = useState({
     profile: user.profile,
@@ -140,9 +141,37 @@ const EditProfile = () => {
             {btnText}
           </button>
         </form>
-        <button className={deleteCss} onClick={handleDelete}>
+        <button className={deleteCss} onClick={() => setShowModal(true)}>
           DELETE USER
         </button>
+        {showModal && (
+          <div className="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center z-50">
+            <div className="bg-bgBtnColor rounded-lg shadow-lg p-6 max-w-sm w-full">
+              <h2 className="text-lg font-bold mb-4 text-center">
+                Are you sure?
+              </h2>
+              <p className="text-center mb-6">This action cannot be undone.</p>
+              <div className="flex justify-between">
+                <button
+                  className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 transition"
+                  onClick={() => {
+                    deleteUser();
+                    deleteCookie();
+                    navigate("/");
+                  }}
+                >
+                  Confirm Delete
+                </button>
+                <button
+                  className="bg-gray-300 text-black py-2 px-4 rounded hover:bg-gray-400 transition"
+                  onClick={() => setShowModal(false)}
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
