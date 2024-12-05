@@ -11,6 +11,9 @@ export default {
         hoverColor: "rgb(39 39 42)",
         profileColor: "rgb(74 222 128)",
       },
+      backgroundImage: {
+        uploadImg: "url('clinet/social-network/public/uploadImgIcon.svg')",
+      },
     },
   },
   plugins: [],
