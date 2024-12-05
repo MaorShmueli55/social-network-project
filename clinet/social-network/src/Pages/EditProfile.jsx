@@ -5,7 +5,7 @@ import { deleteCookie } from "../utils/cookie";
 import { useNavigate } from "react-router-dom";
 import ImageUpload from "../Components/uploadImg";
 import { updateUser } from "../utils/userApi.js";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../store/slices/userSlicer";
 
 const divChoice = "w-[470px] mx-auto text-m";
@@ -21,18 +21,17 @@ const EditProfile = () => {
   const [btnText, setBtnText] = useState("Submit");
   const [msgText, setMsgText] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const user = useSelector((state) => state.user);
   const [formData, setFormData] = useState({
-    profile: "",
-    nickname: "",
-    bio: "",
-    username: "",
-    email: "",
-    password: "",
+    profile: user.profile,
+    nickname: user.nickname,
+    bio: user.email,
+    newUsername: user.username,
+    newEmail: user.email,
+    password: user.password,
   });
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-
   useCheckIfUserValid();
 
   const handleChange = (e) => {
@@ -45,9 +44,7 @@ const EditProfile = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
     const data = await updateUser(formData);
-
     setIsSubmitted(true);
     setBtnText("Submitting...");
     setTimeout(() => {
@@ -99,26 +96,26 @@ const EditProfile = () => {
             />
           </div>
           <div>
-            <label htmlFor="username">Change UserName:</label>
+            <label htmlFor="newUsername">Change UserName:</label>
             <input
               className={inputCss}
-              placeholder="UserName"
-              value={formData.username}
+              placeholder="New Username"
+              value={formData.newUsername}
               type="text"
-              id="username"
-              name="username"
+              id="newUsername"
+              name="newUsername"
               onChange={handleChange}
             />
           </div>
           <div>
-            <label htmlFor="email">Change Email:</label>
+            <label htmlFor="newEmail">Change Email:</label>
             <input
               className={inputCss}
-              placeholder="Email"
-              value={formData.email}
+              placeholder="New Email"
+              value={formData.newEmail}
               type="email"
-              id="email"
-              name="email"
+              id="newEmail"
+              name="newEmail"
               onChange={handleChange}
             />
           </div>

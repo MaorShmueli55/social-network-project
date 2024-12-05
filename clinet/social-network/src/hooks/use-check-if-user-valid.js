@@ -12,6 +12,8 @@ export async function useCheckIfUserValid() {
   if (dataAuth.userLogout) {
     navigate("/");
   } else {
+    // console.log(dataAuth);
+
     dispatch(setUser(dataAuth));
   }
 }

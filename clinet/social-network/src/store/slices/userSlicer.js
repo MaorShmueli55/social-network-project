@@ -6,6 +6,7 @@ const userSlice = createSlice({
     nickname: "",
     profile: "",
     bio: "",
+    email: "",
   },
   reducers: {
     setUser: (state, action) => {
@@ -13,6 +14,7 @@ const userSlice = createSlice({
         (state.nickname = action.payload.nickname),
         (state.profile = action.payload.profile),
         (state.bio = action.payload.bio);
+      state.email = action.payload.email;
     },
   },
 });

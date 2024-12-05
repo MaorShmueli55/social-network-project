@@ -9,10 +9,10 @@ const MyAccount = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  useCheckIfUserValid();
   const user = useSelector((state) => state.user);
   const submitCss =
     "bg-bgBtnColor text-btnColor rounded-lg my-1 p-1.5 text-[17px] leading-none w-screen ";
-  useCheckIfUserValid();
 
   function handleLogout() {
     deleteCookie();
@@ -25,8 +25,8 @@ const MyAccount = () => {
         <div className="sm:flex sm:flex-col items-center">
           <p className="text-[35px] mb-[10px]">{user.username}</p>
           <AccountCircleIcon sx={{ fontSize: "130px", marginBottom: "5px" }} />
-          <p className="text-[17px]">{user.bio}</p>
-          <p className="text-[25px] mb-[10px]">"bio"</p>
+          <p className="text-[17px]">{user.nickname}</p>
+          <p className="text-[25px] mb-[10px]">{user.bio}</p>
           <div className="flex p-[17px] max-w-[600px]">
             <button
               onClick={() => navigate("/EditProfile")}

@@ -57,12 +57,19 @@ export const updateUser = async (updateUser) => {
         headers: {
           Authorization: `Bearer ${jwt}`,
         },
+        withCredentials: true,
       }
     );
     console.log(response.data);
 
     return response.data;
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+    return {
+      success: false,
+      error: error.response?.data || error.message,
+    };
+  }
 };
 
 export const deleteUser = async () => {
