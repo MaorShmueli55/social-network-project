@@ -29,7 +29,7 @@ const MyAccount = () => {
               <img
                 src={user.profile}
                 alt="Profile"
-                className="w-[130px] h-[130px] rounded-full mb-2 border border-gray-300"
+                className="w-[130px] h-[130px]  rounded-full mb-2 border border-gray-300 object-cover "
               />
             ) : (
               <AccountCircleIcon

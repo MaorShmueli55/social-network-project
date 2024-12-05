@@ -61,7 +61,7 @@ function NavBar() {
               <img
                 src={isLog.profile}
                 alt="Profile"
-                className="w-[40px] h-[40px] rounded-full mb-2 border border-gray-300"
+                className="w-[40px] h-[40px] rounded-full mb-2 border border-gray-300 object-cover"
               />
             ) : (
               <Person2OutlinedIcon sx={{ fontSize: 40, padding: "1px" }} />
