@@ -59,7 +59,7 @@ const EditProfile = () => {
   };
 
   return (
-    <div className="h-screen p-[20px] sm:mr-[70px}">
+    <div className="h-screen p-[20px] sm:mr-[70px} overflow-y-auto">
       <h1 className={titleCss}>Edit Your Profile Details</h1>
       <div className={titleCss}>{msgText}</div>
       <div className={`${divChoice}`}>

@@ -61,7 +61,7 @@ const UploadPost = () => {
           required={true}
         />
         <input
-          className="bg-bgBtnColor h-[200px] text-btnColor rounded-lg my-1 h-14 p-5 text-base"
+          className="bg-bgBtnColor  text-btnColor rounded-lg my-1 h-14 p-5 text-base"
           placeholder="content"
           type="text"
           value={formData.content}
