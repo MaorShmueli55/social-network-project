@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import { deleteComment } from "../utils/commentApi";
 
 const Comments = ({ commentsData }) => {
   const user = useSelector((state) => state.user);
