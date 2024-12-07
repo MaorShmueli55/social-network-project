@@ -7,6 +7,7 @@ import Comments from "./Comments.jsx";
 import DeleteOutlineRoundedIcon from "@mui/icons-material/DeleteOutlineRounded";
 import { useSelector } from "react-redux";
 import { deletePost } from "../utils/postApi.js";
+import { useNavigate } from "react-router-dom";
 
 const PostCard = ({ postData }) => {
   const [commentsData, setCommentsData] = useState([]);
@@ -14,6 +15,7 @@ const PostCard = ({ postData }) => {
   const [changeState, setChangeState] = useState(false);
 
   const user = useSelector((state) => state.user);
+  const navigate = useNavigate();
 
   const getAllComments = async (postId) => {
     const data = await getAllCommentsByPostId(postId);
@@ -67,6 +69,7 @@ const PostCard = ({ postData }) => {
               className="text-gray-500 hover:text-red-500"
               onClick={() => {
                 deletePost(postData._id);
+                navigate("/MyAccount");
               }}
             >
               <DeleteOutlineRoundedIcon />
