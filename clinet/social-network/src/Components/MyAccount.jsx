@@ -33,7 +33,7 @@ const MyAccount = () => {
   }
 
   return (
-    <div className="h-screen p-[20px] sm:mr-[70px]">
+    <div className="h-screen p-[20px] sm:mr-[70px] ">
       <div className="sm:flex sm:justify-center">
         <div className="sm:flex sm:flex-col items-center">
           <p className="text-[35px] mb-[10px]">{user.username}</p>
@@ -65,9 +65,9 @@ const MyAccount = () => {
           </div>
         </div>
       </div>
-      <div>
-        <h1>your posts</h1>
-        <div>
+      <div className="flex flex-col items-center">
+        <h1 className="text-[30px] font-bold">Your posts</h1>
+        <div className="mb-[70px]">
           {PostsData.map((postData) => {
             return <PostCard key={postData._id} postData={postData} />;
           })}

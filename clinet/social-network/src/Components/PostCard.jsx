@@ -4,10 +4,15 @@ import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ModeCommentRoundedIcon from "@mui/icons-material/ModeCommentRounded";
 import Comments from "./Comments.jsx";
+import DeleteOutlineRoundedIcon from "@mui/icons-material/DeleteOutlineRounded";
+import { useSelector } from "react-redux";
+import { deletePost } from "../utils/postApi.js";
 
 const PostCard = ({ postData }) => {
   const [commentsData, setCommentsData] = useState([]);
   const [ClickOnComments, setClickOnComments] = useState(false);
+
+  const user = useSelector((state) => state.user);
 
   const getAllComments = async (postId) => {
     const data = await getAllCommentsByPostId(postId);
@@ -19,7 +24,7 @@ const PostCard = ({ postData }) => {
   }, []);
   return (
     <>
-      <div className=" rounded-lg shadow-md max-w-md mx-auto">
+      <div className=" rounded-lg shadow-md max-w-md mx-auto ">
         <div className="flex items-center p-4 border-b">
           {postData.profileImg ? (
             <img
@@ -56,9 +61,21 @@ const PostCard = ({ postData }) => {
           >
             <ModeCommentRoundedIcon />
           </button>
+          {postData.username === user.username && (
+            <button
+              className="text-gray-500 hover:text-red-500"
+              onClick={() => {
+                deletePost(postData._id);
+              }}
+            >
+              <DeleteOutlineRoundedIcon />
+            </button>
+          )}
         </div>
 
-        {ClickOnComments && <Comments commentsData={commentsData} />}
+        {ClickOnComments && (
+          <Comments commentsData={commentsData} postId={postData._id} />
+        )}
       </div>
     </>
   );
