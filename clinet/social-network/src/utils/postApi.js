@@ -54,3 +54,21 @@ export const getAllPostsByUser = async () => {
     };
   }
 };
+
+export const deletePost = async (postId) => {
+  try {
+    const jwt = Cookies.get("jwt");
+    const response = await axios.delete(`${base_url}/api/post/byId/${postId}`, {
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    return {
+      success: false,
+      error: error.response?.data || error.message,
+    };
+  }
+};

@@ -26,7 +26,7 @@ const HomePage = () => {
   return (
     <>
       <div className="p-5">
-        <div>
+        <div className="mb-[70px]">
           {PostsData.map((postData) => {
             return <PostCard key={postData._id} postData={postData} />;
           })}
