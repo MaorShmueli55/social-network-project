@@ -14,3 +14,17 @@ export const getAllCommentsByPostId = async (postId) => {
     };
   }
 };
+
+export const deleteComment = async (commentsId) => {
+  try {
+    const response = await axios.delete(
+      `${base_url}/api/comment/delete/${commentsId}`
+    );
+    return response.data;
+  } catch (error) {
+    return {
+      success: false,
+      error: error.response?.data || error.message,
+    };
+  }
+};
