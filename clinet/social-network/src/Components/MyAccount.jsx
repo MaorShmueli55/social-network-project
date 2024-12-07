@@ -4,15 +4,28 @@ import { useCheckIfUserValid } from "../hooks/use-check-if-user-valid";
 import { deleteCookie } from "../utils/cookie";
 import { setUser } from "../store/slices/userSlicer";
 import { useNavigate } from "react-router-dom";
+import { getAllPostsByUser } from "../utils/postApi";
+import { useEffect, useState } from "react";
+import PostCard from "./PostCard";
 
 const MyAccount = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [PostsData, setPostsData] = useState([]);
 
   useCheckIfUserValid();
   const user = useSelector((state) => state.user);
   const submitCss =
     "bg-bgBtnColor text-btnColor rounded-lg my-1 p-1.5 text-[17px] leading-none w-screen ";
+
+  const getMyPosts = async () => {
+    const data = await getAllPostsByUser();
+    setPostsData(data);
+  };
+
+  useEffect(() => {
+    getMyPosts();
+  }, []);
 
   function handleLogout() {
     deleteCookie();
@@ -50,6 +63,14 @@ const MyAccount = () => {
               LogOut
             </button>
           </div>
+        </div>
+      </div>
+      <div>
+        <h1>your posts</h1>
+        <div>
+          {PostsData.map((postData) => {
+            return <PostCard key={postData._id} postData={postData} />;
+          })}
         </div>
       </div>
     </div>

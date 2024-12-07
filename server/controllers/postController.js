@@ -57,6 +57,22 @@ export const getPostById = async (req, res) => {
   }
 };
 
+export const getMyPosts = async (req, res) => {
+  try {
+    const id = req.user._id;
+    const postByUser = await Post.find({ createdBy: id });
+    if (!postByUser) {
+      return res
+        .status(404)
+        .send({ error: "posts not found pls add new posts" });
+    }
+    res.status(200).send(postByUser);
+  } catch (error) {
+    console.error("Error finding postById by ID:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
 export const deletePostById = async (req, res) => {
   const { id } = req.params;
   const userId = req.user._id;

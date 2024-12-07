@@ -16,7 +16,7 @@ function NavBar() {
     <div
       className={`${
         isLog.username
-          ? "bg-black flex flex-col justify-between absolute bottom-0 w-full sm:right-0 sm:w-[70px] sm:h-full"
+          ? "bg-black flex flex-col justify-between fixed  bottom-0 w-full sm:right-0 sm:w-[70px] sm:h-full"
           : "hidden"
       }`}
     >

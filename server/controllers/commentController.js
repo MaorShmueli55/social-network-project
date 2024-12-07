@@ -5,13 +5,17 @@ export const crateNewComment = async (req, res) => {
   const { CommentText, postId } = req.body;
   const userId = req.user._id;
   const username = req.user.username;
+  const profileImg = req.user.profile;
   if (!CommentText || !postId) {
     return res
       .status(400)
       .send({ error: "CommentText and postId are required" });
   }
   try {
+    console.log(profileImg);
+
     const newComment = new Comment({
+      profileImg: profileImg,
       username: username,
       CommentText: CommentText,
       createdBy: userId,

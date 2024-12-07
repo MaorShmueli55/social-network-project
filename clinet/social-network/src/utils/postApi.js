@@ -36,3 +36,21 @@ export const getAllPosts = async () => {
     };
   }
 };
+
+export const getAllPostsByUser = async () => {
+  try {
+    const jwt = Cookies.get("jwt");
+    const response = await axios.get(`${base_url}/api/post/myPosts`, {
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    return {
+      success: false,
+      error: error.response?.data || error.message,
+    };
+  }
+};
