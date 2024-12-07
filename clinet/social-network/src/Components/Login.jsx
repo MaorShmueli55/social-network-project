@@ -36,7 +36,7 @@ const Login = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    isSubmitted === true;
+    setIsSubmitted(true);
 
     const data = await signIn(formData);
     setBtnText("loading");

@@ -39,24 +39,24 @@ const Register = () => {
     const data = await signUp(formData);
 
     setBtnText("loading");
-    setMsgText(data.message);
 
+    setMsgText(data.message);
     setTimeout(() => {
-      setFormData({
-        username: "",
-        email: "",
-        password: "",
-      });
       if (data.status === "success") {
         setTimeout(() => {
           navigate("/signin");
-        }, 2500);
+          setFormData({
+            username: "",
+            email: "",
+            password: "",
+          });
+        }, 1500);
       } else {
         setMsgText(data.error.message);
       }
       setBtnText("Signup");
       setIsSubmitted(false);
-    }, 2000);
+    }, 1500);
   };
 
   return (
