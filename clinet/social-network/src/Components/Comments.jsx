@@ -3,14 +3,20 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { crateNewComment, deleteComment } from "../utils/commentApi.js";
 import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
 import { useState } from "react";
+import { useCheckIfUserValid } from "../hooks/use-check-if-user-valid.js";
 
-const Comments = ({ commentsData }) => {
+const Comments = ({ commentsData, postId, setChangeState }) => {
   const user = useSelector((state) => state.user);
-  const [commentInput, setCommentInput] = useState();
+  const [commentInput, setCommentInput] = useState("");
 
   const addComment = async (commentInput, postId) => {
     await crateNewComment(commentInput, postId);
     setCommentInput("");
+    setChangeState((prev) => !prev);
+  };
+
+  const handleChange = (e) => {
+    setCommentInput(e.target.value);
   };
 
   return (
@@ -22,13 +28,14 @@ const Comments = ({ commentsData }) => {
             className="bg-bgBtnColor text-btnColor rounded-lg my-2 mx-2 h-[10px] p-4 text-base"
             placeholder="add Comment"
             value={commentInput}
+            onChange={handleChange}
             type="text"
             id="addComment"
             name="addComment"
           ></input>
           <button
             className="bg-white text-btnColor rounded-lg my-1 h-[10px] p-4 text-center leading-none"
-            onClick={addComment}
+            onClick={() => addComment(commentInput, postId)}
           >
             add
           </button>
@@ -74,6 +81,7 @@ const Comments = ({ commentsData }) => {
                     <DeleteOutlineIcon
                       onClick={() => {
                         deleteComment(commentData._id);
+                        setChangeState((prev) => !prev);
                       }}
                     />
                   </div>

@@ -11,6 +11,7 @@ import { deletePost } from "../utils/postApi.js";
 const PostCard = ({ postData }) => {
   const [commentsData, setCommentsData] = useState([]);
   const [ClickOnComments, setClickOnComments] = useState(false);
+  const [changeState, setChangeState] = useState(false);
 
   const user = useSelector((state) => state.user);
 
@@ -74,7 +75,12 @@ const PostCard = ({ postData }) => {
         </div>
 
         {ClickOnComments && (
-          <Comments commentsData={commentsData} postId={postData._id} />
+          <Comments
+            commentsData={commentsData}
+            postId={postData._id}
+            changeState={changeState}
+            setChangeState={setChangeState}
+          />
         )}
       </div>
     </>
