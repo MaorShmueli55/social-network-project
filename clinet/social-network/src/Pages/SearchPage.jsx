@@ -15,8 +15,8 @@ const SearchPage = () => {
 
   return (
     <div className='w-full flex flex-col gap-5'>
-      <h1 className='text-center pt-5 font-semibold'>Search</h1>
-      <div className={`self-center bg-searchBody w-[80%] min-h-[900px] rounded-3xl flex flex-col p-7 ${outline} `}>
+      <h1 className='text-center pt-5 font-semibold hidden sm:block'>Search</h1>
+      <div className={` self-center bg-searchBody w-full sm:w-[80%] h-[900px] rounded-t-3xl flex flex-col p-7 ${outline} `}>
         <div className="relative">
         
 
