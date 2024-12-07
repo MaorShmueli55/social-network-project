@@ -34,3 +34,24 @@ export const deleteComment = async (commentsId) => {
     };
   }
 };
+
+export const crateNewComment = async (CommentText, postId) => {
+  try {
+    const jwt = Cookies.get("jwt");
+    const response = await axios.post(`${base_url}/api/comment`, {
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+      },
+      body: {
+        CommentText,
+        postId,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    return {
+      success: false,
+      error: error.response?.data || error.message,
+    };
+  }
+};
