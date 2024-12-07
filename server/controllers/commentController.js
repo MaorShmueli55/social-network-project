@@ -57,11 +57,13 @@ export const getAllCommentsByPostId = async (req, res) => {
 export const deleteCommentById = async (req, res) => {
   const { commentsId } = req.params;
   const userId = req.user._id;
+  console.log(commentsId);
+
   const commentById = await Comment.findById(commentsId);
   if (!commentById) {
     return res.status(404).send({ error: "comment not found" });
   }
-  if (userId.equals(commentById.createdBy)) {
+  if (userId === commentById.createdBy.toString()) {
     try {
       const deleteComment = await Comment.findByIdAndDelete(commentsId);
       res.status(200).send({

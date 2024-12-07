@@ -17,8 +17,14 @@ export const getAllCommentsByPostId = async (postId) => {
 
 export const deleteComment = async (commentsId) => {
   try {
+    const jwt = Cookies.get("jwt");
     const response = await axios.delete(
-      `${base_url}/api/comment/delete/${commentsId}`
+      `${base_url}/api/comment/delete/${commentsId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+        },
+      }
     );
     return response.data;
   } catch (error) {
