@@ -37,7 +37,7 @@ function NavBar() {
           </div>
         </Link>
 
-        <Link to="/HomePage">
+        <Link to="/search">
           <div className={iconCss}>
             <SearchIcon sx={{ fontSize: 40, padding: "1px" }} />
           </div>

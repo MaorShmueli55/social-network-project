@@ -9,6 +9,7 @@ import NavBar from "./Components/NavBar";
 import MyAccount from "./Components/MyAccount";
 import EditProfile from "./Pages/EditProfile";
 import UploadPost from "./Pages/UploadPost";
+import SearchPage from "./Pages/SearchPage";
 
 //if user is not signed in redirect to landing Page "/login" else stay in "/"
 
@@ -24,6 +25,7 @@ function App() {
           <Route path="/MyAccount" element={<MyAccount />} />
           <Route path="/EditProfile" element={<EditProfile />} />
           <Route path="/UploadPost" element={<UploadPost />} />
+          <Route path="/search" element={<SearchPage />} />
         </Routes>
         <NavBar />
       </BrowserRouter>
