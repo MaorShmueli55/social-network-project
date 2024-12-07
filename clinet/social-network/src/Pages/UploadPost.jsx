@@ -1,7 +1,7 @@
 import { useCheckIfUserValid } from "../hooks/use-check-if-user-valid";
 import { useState, useEffect } from "react";
 import ImageUpload from "../Components/uploadImg";
-import { createPost } from "../utils/userApi.js";
+import { createPost } from "../utils/postApi.js";
 
 const divChoice =
   "bg-primary text-center my-10 w-40 mx-auto border-1 rounded-md -mt-2 text-2xl";

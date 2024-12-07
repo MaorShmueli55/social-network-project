@@ -8,7 +8,7 @@ export const crateNewPost = async (req, res) => {
   }
   const id = req.user._id;
   const username = req.user.username;
-  const profileImg = req.user.profileImg;
+  const profileImg = req.user.profile;
 
   try {
     const newPost = new Post({
@@ -34,7 +34,7 @@ export const crateNewPost = async (req, res) => {
 
 export const getPosts = async (req, res) => {
   try {
-    const Posts = await Post.find().select("-comments");
+    const Posts = await Post.find();
 
     res.status(200).send(Posts);
   } catch (error) {

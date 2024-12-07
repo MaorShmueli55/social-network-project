@@ -60,6 +60,7 @@ export const updateUser = async (updateUser) => {
         withCredentials: true,
       }
     );
+
     return response.data;
   } catch (error) {
     console.log(error);
@@ -82,26 +83,5 @@ export const deleteUser = async () => {
     return response.data;
   } catch (error) {
     console.log(error);
-  }
-};
-
-export const createPost = async (postData) => {
-  try {
-    const jwt = Cookies.get("jwt");
-    const response = await axios.post(
-      `${base_url}/api/post/cratePost`,
-      postData,
-      {
-        headers: {
-          Authorization: `Bearer ${jwt}`,
-        },
-      }
-    );
-    return response.data;
-  } catch (error) {
-    return {
-      success: false,
-      error: error.response?.data || error.message,
-    };
   }
 };
