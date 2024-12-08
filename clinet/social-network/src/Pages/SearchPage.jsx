@@ -3,8 +3,11 @@ import Person2OutlinedIcon from '@mui/icons-material/Person2Outlined';
 import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { BorderBottom } from '@mui/icons-material';
 
 const outline = "outline outline-outlineDivs outline-1"
+const bottomBorder = 'border-b border-outlineDivs'
+
 
 const SearchPage = () => {
   const [input, setInput] = useState("");
@@ -58,9 +61,9 @@ const SearchPage = () => {
         </div>
 
         <ul className="mt-5">
-          <li className="flex items-center gap-2">
+          <li className="flex items-center gap-2 mt-2">
             <Person2OutlinedIcon sx={{ fontSize: 40, padding: "1px", background:"black", borderRadius:"20px" }} />
-            <div className='flex w-full justify-between border-b-[1px] p-1'>
+            <div className={`flex w-full justify-between ${bottomBorder}`}>
             <span >
             <h2>UserName</h2>
             <p className='mb-3 text-outlineDivs'>bio</p>
@@ -68,9 +71,9 @@ const SearchPage = () => {
             <ArrowForwardIosIcon sx={{alignSelf:"center", padding:"1px", color:"#4D4D4D"}} />
             </div>
           </li>
-          <li className="flex items-center gap-2">
+          <li className="flex items-center gap-2 mt-2">
             <Person2OutlinedIcon sx={{ fontSize: 40, padding: "1px", background:"black", borderRadius:"20px" }} />
-            <div className='flex w-full justify-between border-b-[1px] p-1'>
+            <div className={`flex w-full justify-between ${bottomBorder}`}>
             <span >
             <h2>UserName</h2>
             <p className='mb-3 text-outlineDivs'>bio</p>
@@ -78,19 +81,9 @@ const SearchPage = () => {
             <ArrowForwardIosIcon sx={{alignSelf:"center", padding:"1px", color:"#4D4D4D"}} />
             </div>
           </li>
-          <li className="flex items-center gap-2">
+          <li className="flex items-center gap-2 mt-2">
             <Person2OutlinedIcon sx={{ fontSize: 40, padding: "1px", background:"black", borderRadius:"20px" }} />
-            <div className='flex w-full justify-between border-b-[1px] p-1'>
-            <span >
-            <h2>UserName</h2>
-            <p className='mb-3 text-outlineDivs'>bio</p>
-            </span>
-            <ArrowForwardIosIcon sx={{alignSelf:"center", padding:"1px", color:"#4D4D4D"}} />
-            </div>
-          </li>
-          <li className="flex items-center gap-2">
-            <Person2OutlinedIcon sx={{ fontSize: 40, padding: "1px", background:"black", borderRadius:"20px" }} />
-            <div className='flex w-full justify-between border-b-[1px] p-1'>
+            <div className={`flex w-full justify-between ${bottomBorder}`}>
             <span >
             <h2>UserName</h2>
             <p className='mb-3 text-outlineDivs'>bio</p>
