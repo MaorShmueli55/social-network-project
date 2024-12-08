@@ -14,6 +14,7 @@ export const crateNewPost = async (req, res) => {
     const newPost = new Post({
       profileImg: profileImg,
       post,
+      post,
       username: username,
       title,
       content,
