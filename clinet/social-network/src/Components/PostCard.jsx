@@ -43,12 +43,12 @@ const PostCard = ({ postData }) => {
   return (
     <>
       <div className=" rounded-lg shadow-md max-w-md mx-auto ">
-        <div className="flex items-center p-4 border-b">
+        <div className="flex items-center p-4 m-auto  sm:-ml-10 md:-ml-20">
           {postData.profileImg ? (
             <img
               src={postData.profileImg}
               alt="Profile"
-              className="w-10 h-10 rounded-full object-cover"
+              className="w-10 h-10 rounded-full object-cover  "
             />
           ) : (
             <Person2OutlinedIcon sx={{ fontSize: 40, padding: "1px" }} />
@@ -59,13 +59,14 @@ const PostCard = ({ postData }) => {
         <img
           src={postData.post}
           alt="Post"
-          className="w-full h-106 object-cover"
+          className=" h-106 object-cover min-w-[100%] "
         />
 
         <div className="p-4">
           <h3 className="font-semibold text-lg mb-1">{postData.title}</h3>
           <p className="text-gray-600 text-sm">{postData.content}</p>
         </div>
+
         <div className="flex items-center px-4 pb-4 space-x-4">
           <button
             className="text-gray-500 hover:text-blue-500"
@@ -78,7 +79,7 @@ const PostCard = ({ postData }) => {
           <button className="text-gray-500 hover:text-red-500"
           onClick={handleLikeToggle}>
             <FavoriteBorderIcon />
-            <span>{likes.length} Likes</span>
+            <span>{likes.length}</span>
           </button>
           {postData.username === user.username && (
             <button

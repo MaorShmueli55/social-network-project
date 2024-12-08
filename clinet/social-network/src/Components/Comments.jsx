@@ -34,7 +34,7 @@ const Comments = ({ commentsData, postId, setChangeState }) => {
             name="addComment"
           ></input>
           <button
-            className="bg-white text-btnColor rounded-lg my-1 h-[10px] p-4 text-center leading-none"
+            className="bg-primary text-btnColor rounded-lg my-1 h-[40px] w-[100px] p-2 flex items-center justify-center"
             onClick={() => addComment(commentInput, postId)}
           >
             add
