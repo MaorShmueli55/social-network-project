@@ -5,8 +5,10 @@ import {
   getPostById,
   deletePostById,
   getMyPosts,
+  likePost,
 } from "../controllers/postController.js";
 import { verifyToken } from "../middleware/auth.js";
+
 
 const router = express.Router();
 
@@ -19,5 +21,7 @@ router.get("/myPosts", verifyToken, getMyPosts);
 router.get("/byId/:id", getPostById);
 
 router.delete("/byId/:id", verifyToken, deletePostById);
+
+router.put("/like/:id", verifyToken,likePost)
 
 export default router;

@@ -6,11 +6,15 @@ import ModeCommentRoundedIcon from "@mui/icons-material/ModeCommentRounded";
 import Comments from "./Comments.jsx";
 import DeleteOutlineRoundedIcon from "@mui/icons-material/DeleteOutlineRounded";
 import { useSelector } from "react-redux";
-import { deletePost } from "../utils/postApi.js";
+import { deletePost, likePost } from "../utils/postApi.js";
 import { useNavigate } from "react-router-dom";
 
 const PostCard = ({ postData }) => {
   const [commentsData, setCommentsData] = useState([]);
+  const [likes, setLikes] = useState(postData.likes); // State for likes
+  const [isLiked, setIsLiked] = useState(
+    postData.likes.includes(useSelector((state) => state.user._id))
+  );
   const [ClickOnComments, setClickOnComments] = useState(false);
   const [changeState, setChangeState] = useState(false);
 
@@ -21,6 +25,17 @@ const PostCard = ({ postData }) => {
     const data = await getAllCommentsByPostId(postId);
     setCommentsData(data);
   };
+
+  const handleLikeToggle = async () => {
+    try {
+      const updatedPost = await likePost(postData._id); // Call the likePost API
+      setLikes(updatedPost.likes); // Update likes state with the updated array
+      setIsLiked(!isLiked); // Toggle the isLiked state
+    } catch (error) {
+      console.error("Error liking/unliking post:", error);
+    }
+  };
+
 
   useEffect(() => {
     getAllComments(postData._id);
@@ -51,11 +66,7 @@ const PostCard = ({ postData }) => {
           <h3 className="font-semibold text-lg mb-1">{postData.title}</h3>
           <p className="text-gray-600 text-sm">{postData.content}</p>
         </div>
-
         <div className="flex items-center px-4 pb-4 space-x-4">
-          <button className="text-gray-500 hover:text-red-500">
-            <FavoriteBorderIcon />
-          </button>
           <button
             className="text-gray-500 hover:text-blue-500"
             onClick={() => {
@@ -63,6 +74,11 @@ const PostCard = ({ postData }) => {
             }}
           >
             <ModeCommentRoundedIcon />
+          </button>
+          <button className="text-gray-500 hover:text-red-500"
+          onClick={handleLikeToggle}>
+            <FavoriteBorderIcon />
+            <span>{likes.length} Likes</span>
           </button>
           {postData.username === user.username && (
             <button

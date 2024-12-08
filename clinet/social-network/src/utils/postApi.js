@@ -72,3 +72,22 @@ export const deletePost = async (postId) => {
     };
   }
 };
+
+export const likePost = async (postId) => {
+  try {
+    const jwt = Cookies.get("jwt");
+    const response = await axios.put(`${base_url}/api/post/like/${postId}`, 
+      {},
+      { headers: {
+          Authorization: `Bearer ${jwt}`,
+        },
+      });
+        return response.data;
+      } 
+  catch (error) {
+        return {
+          success: false,
+          error: error.response?.data || error.message,
+        };
+    }
+};

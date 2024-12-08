@@ -29,6 +29,8 @@ const postSchema = new mongoose.Schema({
     default: Date.now(),
   },
   comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comments" }],
+  likes: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],
+  
 });
 
 export default mongoose.model("Post", postSchema);
