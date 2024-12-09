@@ -8,6 +8,9 @@ import { getAllPostsByUser } from "../utils/postApi";
 import { useEffect, useState } from "react";
 import PostCard from "./PostCard";
 
+const outline = "outline outline-outlineDivs outline-1"
+const bottomBorder = 'border-b border-outlineDivs'
+
 const MyAccount = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -33,7 +36,8 @@ const MyAccount = () => {
   }
 
   return (
-    <div className="h-screen p-[20px] sm:mr-[70px] ">
+    <div className="w-screen h-screen p-[20px] sm:mr-[70px] ">
+         <div className={` self-center bg-searchBody w-full sm:w-[40%] h-auto rounded-t-3xl flex flex-col p-7 ${outline} m-auto mt-12`}>
       <div className="sm:flex sm:justify-center">
         <div className="sm:flex sm:flex-col items-center">
           <p className="text-[35px] mb-[10px]">{user.username}</p>
@@ -65,13 +69,14 @@ const MyAccount = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col items-center">
-        <h1 className="text-[30px] font-bold">Your posts</h1>
+      <div className={` ${bottomBorder} flex flex-col items-center`}>
+        <span className={` ${bottomBorder} w-full text-center py-5`}><h1 className={`text-[30px] font-bold`}>Your posts</h1></span>
         <div className="mb-[70px]">
           {PostsData.map((postData) => {
             return <PostCard key={postData._id} postData={postData} />;
           })}
         </div>
+      </div>
       </div>
     </div>
   );
